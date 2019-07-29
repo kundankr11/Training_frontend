@@ -1,0 +1,21 @@
+
+
+h1 {
+  text-align: center;
+  width: 100%;
+  color: #111;
+}
+
+h6 {
+  text-align: center;
+  width: 100%;
+  color: #111;
+}
+
+
+
+.errorMessage {
+  color: red;
+}
+
+
