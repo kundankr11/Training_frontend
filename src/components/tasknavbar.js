@@ -31,7 +31,7 @@ class taskBar extends Component {
           <Container style = {{background: "#fff", width:"75%", marginTop:"0px", padding: "0px 0px", height:"100px"}}>
             <Row>
               <Col xs={6} md={4}>
-              <label style = {{color: "#111", marginLeft: "20px", marginTop:"30px", fontWeight:"bold", fontSize:"20px", textTransform: "capitalize"}}> {this.props.cookies.get('Name')}</label>
+              <label style = {{color: "#111", marginLeft: "20px", marginTop:"30px", fontWeight:"bold", fontSize:"20px", textTransform: "capitalize"}}> {this.props.cookies.get('Name').split(" ")[0]}</label>
                 
               </Col>
              
@@ -39,10 +39,10 @@ class taskBar extends Component {
           </Container>
         </div>
         <a >
-          <Link className="nav-link" to="/dash" style = {{marginLeft:"10px"}}>
+          <Link className="nav-link" to="/dash" style = {{margin:"10px"}}>
             Dashboard
           </Link>
-          <Link className="nav-link" to="/taskSearch" style = {{marginLeft:"10px"}}>
+          <Link className="nav-link" to="/taskSearch" style = {{margin:"10px"}}>
             Task Menu
           </Link>
         </a>

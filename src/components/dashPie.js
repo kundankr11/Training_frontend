@@ -11,7 +11,7 @@ import Taskbar from "../components/tasknavbar";
 import { statusSearch, statusUpdate } from "../actions/taskactions";
 import { Dots } from "react-activity";
 import "../components/Dots.css";
-import "../components/styling/piechart.css"
+import "../components/styling/piechart.css";
 import "react-activity/dist/react-activity.css";
 import {
 	Bootstrap,
@@ -37,6 +37,7 @@ class dashPie extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			showme: false,
 			dat: "safasf",
 			series: [
 				{
@@ -80,6 +81,17 @@ class dashPie extends Component {
 		itemList[2].y = this.props.data.overdues;
 		itemList[3].y = this.props.data.progress;
 		itemList[4].y = this.props.data.noActivities;
+		if (
+			itemList[0].y !== 0 ||
+			itemList[1].y !== 0 ||
+			itemList[2].y !== 0 ||
+			itemList[3].y !== 0 ||
+			itemList[4].y !== 0
+		) {
+			this.setState({
+				showme: true
+			});
+		}
 	}
 	highChartsRender() {
 		Highcharts.chart({
@@ -105,7 +117,7 @@ class dashPie extends Component {
 						format: "{point.name}: {point.percentage:.1f} %"
 					},
 					innerSize: "60%",
-					colors: ['#fff', '#ED561B', '#DDDF00', '#24CBE5', '#64E572']
+					colors: ["#fff", "#ED561B", "#DDDF00", "#24CBE5", "#64E572"]
 				}
 			},
 			series: this.state.series
@@ -120,9 +132,14 @@ class dashPie extends Component {
 	}
 	componentDidUpdate() {
 		if (!this.props.result.dataloading) {
-			this.high();
-			this.highChartsRender();
-			this.props.dataLoadingReset();
+			if (!this.state.showme) {
+				this.high();
+			}
+
+			if (this.state.showme) {
+				this.highChartsRender();
+				this.props.dataLoadingReset();
+			}
 		}
 	}
 
@@ -134,100 +151,112 @@ class dashPie extends Component {
 				{console.log("Dashboard")}
 				{console.log(this.state.pieD)}
 				<Taskbar cookies={this.props.cookies} />
-				<div style={{ position: "relative" }}>
-					{this.props.result.dataloading ? (
-						<div
-							style={{
-								position: "absolute",
-								marginLeft: "750px"
-							}}
-						>
-							{" "}
-							<Dots />
-						</div>
-					) : null}
-
-					{!this.props.result.dataloading ? (
-						<label
-							style={{
-								color: "#053787",
-								position: "relative",
-								left: "380px",
-								fontSize: "30px",
-								top: "30px",
-								color: "#053787",
-								fontWeight: "bold",
-								zIndex: "100"
-							}}
-						>
-							{" "}
-							Tasks For Today
-						</label>
-					) : null}
-					{!this.props.result.dataloading ? (
-						<label
-							style={{
-								color: "#053787",
-								position: "relative",
-								left: "780px",
-								fontSize: "30px",
-								top: "30px",
-								color: "#053787",
-								fontWeight: "bold"
-							}}
-						>
-							Task History
-						</label>
-					) : null}
-
-					{!this.props.result.dataloading ? (
-						<Table
-							className="tableinfo"
-							striped
-							bordered
-							hover
-							size="lg"
-							variant="dark"
-							style={{
-								position: "relative",
-								left: "180px",
-								width: "45%",
-								backgroundColor: "#053787"
-							}}
-						>
-							<thead>
-								<tr>
-									<td>Title</td>
-									<td>Assigner</td>
-									<td>Status</td>
-									<td>Due Date</td>
-									<td>Task Description</td>
-								</tr>
-							</thead>
-							{filter.map((detail, index) => {
-								return (
-									<tr>
-										<td>{detail.taskTitle}</td>
-										<td>{detail.assigned_by.name}</td>
-										<td>{detail.taskStatus}</td>
-										<td>{detail.dueDate}</td>
-										<td>{detail.taskDes}</td>
-									</tr>
-								);
-							})}
-						</Table>
-					) : null}
+				{this.props.result.dataloading ? (
 					<div
-						id="Task"
 						style={{
-							position: "relative",
-							left: "500px",
-
+							position: "absolute",
+							marginLeft: "750px"
 						}}
 					>
-						<div></div>
+						{" "}
+						<Dots />
 					</div>
-				</div>
+				) : null}
+				{this.state.showme ? (
+					<div style={{ position: "relative" }}>
+						{!this.props.result.dataloading ? (
+							<label
+								style={{
+									color: "#053787",
+									position: "relative",
+									left: "380px",
+									fontSize: "30px",
+									top: "30px",
+									color: "#053787",
+									fontWeight: "bold",
+									zIndex: "100"
+								}}
+							>
+								{" "}
+								Tasks For Today
+							</label>
+						) : null}
+						{!this.props.result.dataloading ? (
+							<label
+								style={{
+									color: "#053787",
+									position: "relative",
+									left: "780px",
+									fontSize: "30px",
+									top: "30px",
+									color: "#053787",
+									fontWeight: "bold"
+								}}
+							>
+								Task History
+							</label>
+						) : null}
+
+						{!this.props.result.dataloading ? (
+							<Table
+								className="tableinfo"
+								striped
+								bordered
+								hover
+								size="lg"
+								variant="dark"
+								style={{
+									position: "relative",
+									left: "180px",
+									width: "45%",
+									backgroundColor: "#053787"
+								}}
+							>
+								<thead>
+									<tr>
+										<td>Title</td>
+										<td>Assigner</td>
+										<td>Status</td>
+										<td>Due Date</td>
+										<td>Task Description</td>
+									</tr>
+								</thead>
+								{filter.map((detail, index) => {
+									return (
+										<tr>
+											<td>{detail.taskTitle}</td>
+											<td>{detail.assigned_by.name}</td>
+											<td>{detail.taskStatus}</td>
+											<td>{detail.dueDate}</td>
+											<td>{detail.taskDes}</td>
+										</tr>
+									);
+								})}
+							</Table>
+						) : null}
+
+						<div
+							id="Task"
+							style={{
+								position: "relative",
+								left: "500px"
+							}}
+						>
+							<div></div>
+						</div>
+					</div>
+				) : null}
+				{!this.props.result.dataloading && !this.state.showme ?
+				<h2
+					style={{
+						color: "#111",
+						marginTop: "50px",
+						textAlign: "center"
+					}}
+				>
+					ADD TASK to GET STARTED
+				</h2> :null
+			}
 			</div>
 		);
 	}

@@ -140,7 +140,7 @@ export const statusSearch = task => dispatch => {
 
 		})
 		.catch(err => console.log(err.response));
-	}, 0);
+	}, 3000);
 };
 
 export const setCurrentResult = searchResult => {
