@@ -11,6 +11,7 @@ import Taskbar from "../components/tasknavbar";
 import { statusSearch, statusUpdate } from "../actions/taskactions";
 import { Dots } from "react-activity";
 import "../components/Dots.css";
+import "../components/styling/piechart.css"
 import "react-activity/dist/react-activity.css";
 import {
 	Bootstrap,
@@ -84,7 +85,7 @@ class dashPie extends Component {
 		Highcharts.chart({
 			chart: {
 				type: "pie",
-				renderTo: "Task Status"
+				renderTo: "Task"
 			},
 			title: {
 				verticalAlign: "middle",
@@ -217,11 +218,11 @@ class dashPie extends Component {
 						</Table>
 					) : null}
 					<div
-						id="Task Status"
+						id="Task"
 						style={{
-							position: "absolute",
-							left: "830px",
-							top: "100px"
+							position: "relative",
+							left: "500px",
+
 						}}
 					>
 						<div></div>
