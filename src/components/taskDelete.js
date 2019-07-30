@@ -442,12 +442,13 @@ class creatorupdate extends Component {
 	}
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
 	errors: state.errors,
 	result: state.result1,
 	auth: state.auth,
 	resultInfo: state.resultInfo,
-	paginationPage: state.paginationPage
+	paginationPage: state.paginationPage,
+	cookies: ownProps.cookies,
 });
 
 export default connect(

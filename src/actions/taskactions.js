@@ -32,6 +32,7 @@ export const addTask = (task, history) => dispatch => {
 			payload: null
 		});
 	});
+	console.log('sdfsdg')
 };
 
 export const taskUpdate = (task, history) => dispatch => {
@@ -52,7 +53,7 @@ export const taskDelete = (task, history) => dispatch => {
 	axios
 	.post("http://localhost:8000/api/deletetask", task)
 	.then(res => {
-		history.push("/taskdash");
+		history.push("/dash");
 		history.push("/taskdelete");
 	})
 	.catch(err => {
@@ -139,7 +140,7 @@ export const statusSearch = task => dispatch => {
 
 		})
 		.catch(err => console.log(err.response));
-	}, 3000);
+	}, 0);
 };
 
 export const setCurrentResult = searchResult => {
