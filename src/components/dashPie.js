@@ -32,7 +32,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ExpansionPanel from "../components/expansion";
 import Container from "@material-ui/core/Container";
 import Carousel from "react-bootstrap/Carousel";
-import Menu from '../components/materialcomp/menu'
+import Menu from '../components/materialcomp/menuRev'
 import {
 	Bootstrap,
 	Form,

@@ -9,7 +9,7 @@ import LabelIcon from "@material-ui/icons/Label";
 import WorkIcon from "@material-ui/icons/Work";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import Menu1 from '../menu1'
+
 
 const StyledMenu = withStyles({
   paper: {
@@ -42,69 +42,38 @@ const StyledMenuItem = withStyles(theme => ({
   }
 }))(MenuItem);
 
-export default function CustomizedMenus() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [statusState, setStatusState] = React.useState(false);
-
-  function handleClick(event) {
-    setAnchorEl(event.currentTarget);
-  }
-
-  function handleUpdateStatus() {
-    setStatusState(true);
-  }
-
-  function handleUpdate() {
-    setStatusState(false);
-  }
+export default function CustomizedMenus(props) {
+  const [anchorEl, setAnchorEl] = React.useState(true);
 
   function handleClose() {
-    setAnchorEl(null);
-    setStatusState(false);
-  }
-  function handleClose1() {
-    setStatusState(false);
-    setAnchorEl(null);
+    setAnchorEl(false);
   }
 
+
   return (
+
     <div>
-      <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="primary"
-        style={{ padding: "5px" }}
-        onClick={handleClick}
-      >
-        <AssignmentIcon />
-      </Button>
-      <StyledMenu
-        id="customized-menu"
-        anchorEl={anchorEl}
     
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
+      <StyledMenu
+      
+        open={props.status && anchorEl}     
+        onClose = {handleClose}  
       >
-      {console.log("Props of Menus", Menu.props)}
-        <StyledMenuItem
-         onClick={handleUpdate}  >
+        <StyledMenuItem>
           <ListItemIcon>
             <WorkIcon />
           </ListItemIcon>
           <ListItemText primary="Update Task " />
         </StyledMenuItem>
         <StyledMenuItem
-          onClick={handleUpdateStatus}         
+           
         >
           <ListItemIcon>
             <LabelIcon />
           </ListItemIcon>
           <ListItemText primary="Update Task Status" />
-          <Menu1 status = {statusState}/>
         </StyledMenuItem>
-      </StyledMenu>
-    
+      </StyledMenu>   
     </div>
   );
 }
