@@ -13,6 +13,23 @@ import { Dots } from "react-activity";
 import "../components/Dots.css";
 import "../components/styling/piechart.css";
 import "react-activity/dist/react-activity.css";
+import { makeStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import Divider from "@material-ui/core/Divider";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import Typography from "@material-ui/core/Typography";
+import { deepOrange, deepPurple, green } from "@material-ui/core/colors";
+import Chip from "@material-ui/core/Chip";
+import FaceIcon from "@material-ui/icons/Face";
+import History from "@material-ui/icons/History";
+import DoneIcon from "@material-ui/icons/Done";
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import ExpansionPanel from "../components/expansion";
+import Container from "@material-ui/core/Container";
+import Carousel from "react-bootstrap/Carousel";
 import {
 	Bootstrap,
 	Form,
@@ -46,22 +63,22 @@ class dashPie extends Component {
 						{
 							name: "Completed On Time",
 							y: 0.9,
-							color: "#3498db"
+							color: "blue"
 						},
 						{
 							name: "Completed After Deadline",
 							y: 78.1,
-							color: "#9b59b6"
+							color: "#fffc45"
 						},
 						{
 							name: "Overdues",
 							y: 20.9,
-							color: "#2ecc71"
+							color: "red"
 						},
 						{
 							name: "In-Progress",
 							y: 0.1,
-							color: "#f1c40f"
+							color: "#30ca54"
 						},
 						{
 							name: "No Activities",
@@ -93,6 +110,16 @@ class dashPie extends Component {
 			});
 		}
 	}
+	useStyles = makeStyles(theme => ({
+		root: {
+			width: "100%",
+			maxWidth: 360,
+			backgroundColor: theme.palette.background.paper
+		},
+		inline: {
+			display: "inline"
+		}
+	}));
 	highChartsRender() {
 		Highcharts.chart({
 			chart: {
@@ -145,9 +172,10 @@ class dashPie extends Component {
 
 	render() {
 		const filter = this.props.result.fetched_data;
+		console.log("New UI is here", filter);
 		console.log("PieDATa", this.props.loader);
 		return (
-			<div>
+			<div id="dash">
 				{console.log("Dashboard")}
 				{console.log(this.state.pieD)}
 				<Taskbar cookies={this.props.cookies} />
@@ -165,98 +193,158 @@ class dashPie extends Component {
 				{this.state.showme ? (
 					<div style={{ position: "relative" }}>
 						{!this.props.result.dataloading ? (
-							<label
+							<Chip
+								icon={
+									<FaceIcon
+										style={{
+											height: "50px",
+											width: "50px"
+										}}
+									/>
+								}
+								label="Your Tasks for Today"
+								clickable
 								style={{
-									color: "#053787",
-									position: "relative",
-									left: "380px",
-									fontSize: "30px",
-									top: "30px",
-									color: "#053787",
-									fontWeight: "bold",
-									zIndex: "100"
+									marginLeft: "350px",
+									width: "300px",
+									height: "48px",
+									marginTop: "25px",
+							
+									flexWrap: "wrap",
+									paddingLeft: "0",
+									paddingRight: "0"
 								}}
-							>
-								{" "}
-								Tasks For Today
-							</label>
+								color="primary"
+								deleteIcon={<DoneIcon />}
+							/>
 						) : null}
 						{!this.props.result.dataloading ? (
-							<label
+							<Chip
+								icon={
+									<History
+										style={{
+											height: "50px",
+											width: "50px"
+										}}
+									/>
+								}
+								label="Your Performance"
+								clickable
 								style={{
-									color: "#053787",
-									position: "relative",
-									left: "780px",
-									fontSize: "30px",
-									top: "30px",
-									color: "#053787",
-									fontWeight: "bold"
+									marginLeft: "350px",
+									width: "300px",
+									height: "48px",
+									marginTop: "25px",
+									justifyContent: "center",
+									flexWrap: "wrap",
+									paddingLeft: "0",
+									paddingRight: "0"
 								}}
-							>
-								Task History
-							</label>
+								color="primary"
+								deleteIcon={<DoneIcon />}
+							/>
 						) : null}
 
 						{!this.props.result.dataloading ? (
-							<Table
-								className="tableinfo"
-								striped
-								bordered
-								hover
-								size="lg"
-								variant="dark"
-								style={{
-									position: "relative",
-									left: "180px",
-									width: "45%",
-									backgroundColor: "#053787"
-								}}
-							>
-								<thead>
-									<tr>
-										<td>Title</td>
-										<td>Assigner</td>
-										<td>Status</td>
-										<td>Due Date</td>
-										<td>Task Description</td>
-									</tr>
-								</thead>
-								{filter.map((detail, index) => {
-									return (
-										<tr>
-											<td>{detail.taskTitle}</td>
-											<td>{detail.assigned_by.name}</td>
-											<td>{detail.taskStatus}</td>
-											<td>{detail.dueDate}</td>
-											<td>{detail.taskDes}</td>
-										</tr>
-									);
-								})}
-							</Table>
+							<div style={{ width: "600px" }}>
+								<List
+									style={{
+										marginLeft: "230px",
+										marginRight: "600px",
+										marginTop: "50px",
+										width: "100%",
+										maxWidth: 550,
+										backgroundColor: "#daedff"
+									}}
+								>
+									<ListItem alignItems="flex-start">
+										<ListItemAvatar>
+											<Avatar
+												style={{
+													color: "#fff",
+													backgroundColor: green[500]
+												}}
+											>
+												<AssignmentIcon />
+												{console.log(
+													"pasiinf gthe props.....",
+													filter[0].taskTitle
+												)}
+											</Avatar>
+										</ListItemAvatar>
+										<ExpansionPanel
+											style={{ marginBottom: "10px" }}
+											task1={filter[0].taskTitle}
+											dueDate={
+												filter[0].dueDate.split(" ")[0]
+											}
+											details={filter[0].taskDes}
+											status={filter[0].taskStatus}
+										/>
+									</ListItem>
+									<Divider variant="inset" component="li" />
+									<ListItem alignItems="flex-start">
+										<ListItemAvatar>
+											<Avatar
+												style={{
+													color: "#fff",
+													backgroundColor: green[500]
+												}}
+											>
+												<AssignmentIcon />
+											</Avatar>
+										</ListItemAvatar>
+										<ExpansionPanel
+											task1={filter[1].taskTitle}
+											dueDate={
+												filter[1].dueDate.split(" ")[0]
+											}
+											details={filter[1].taskDes}
+											status={filter[1].taskStatus}
+										/>
+									</ListItem>
+									<Divider variant="inset" component="li" />
+									<ListItem alignItems="flex-start">
+										<ListItemAvatar>
+											<Avatar
+												style={{
+													color: "#fff",
+													backgroundColor: green[500]
+												}}
+											>
+												<AssignmentIcon />
+											</Avatar>
+										</ListItemAvatar>
+										<ExpansionPanel
+											task1={filter[2].taskTitle}
+											dueDate={
+												filter[2].dueDate.split(" ")[0]
+											}
+											details={filter[2].taskDes}
+											status={filter[2].taskStatus}
+										/>
+									</ListItem>
+								</List>
+							</div>
 						) : null}
 
-						<div
-							id="Task"
-							style={{
-								position: "relative",
-								left: "500px"
-							}}
-						>
+						<div id="Task">
 							<div></div>
 						</div>
+						<div></div>
 					</div>
 				) : null}
-				{!this.props.result.dataloading && !this.state.showme ?
-				<h2
-					style={{
-						color: "#111",
-						marginTop: "50px",
-						textAlign: "center"
-					}}
-				>
-					ADD TASK to GET STARTED
-				</h2> :null
-			}
+				{!this.props.result.dataloading && !this.state.showme ? (
+					<h2
+						style={{
+							color: "#111",
+							marginTop: "50px",
+							textAlign: "center"
+						}}
+					>
+						ADD TASK to GET STARTED
+					</h2>
+				) : null}
 			</div>
 		);
 	}

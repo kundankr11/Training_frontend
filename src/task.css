@@ -12,23 +12,39 @@
 
 
 .sidebar a {
-margin-left: 10px;
+  margin-left: 10px;
   font-size: 20px;
   color: #fff;
-  border-color: #fff;
 
 }
 
 
 
-.sidebar a .nav-link {
+.sidebar a .taskSearch {
  position:relative;
  z-index: 1;
  border:4px solid #fff;
+margin: 5px;
 
 }
 
+.sidebar a .dash {
+ position:relative;
+ z-index: 1;
+ border:4px solid #fff;
+margin: 5px;
 
+}
+
+#tasklist .sidebar a .taskSearch{
+ z-index: 1;
+ border:4px solid green;
+}
+
+#dash .sidebar a .dash{
+ z-index: 1;
+ border:4px solid green;
+}
 .sidebar a .nav-link:before{
   display: block;
   position: absolute;
@@ -45,6 +61,7 @@ margin-left: 10px;
 
 .sidebar a .nav-link:hover:before {
   height: 100%;
+
 }
 /*label::first-letter {
   text-transform: capitalize;
