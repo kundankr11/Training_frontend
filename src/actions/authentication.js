@@ -24,7 +24,8 @@ export const registerUser = (user, history) => dispatch => {
     });
 }
 export const createUser = (user, history) => dispatch => {
-    axios.post('http://localhost:8000/api/createuser',  user  )
+    return axios.post('http://localhost:8000/api/createuser',  user  )
+
     .then(res =>{ 
          dispatch({
             type: GET_ERRORS,

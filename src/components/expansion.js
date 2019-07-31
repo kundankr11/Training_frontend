@@ -9,7 +9,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
-
+import Menu from '../components/materialcomp/menu';
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import DeleteIcon from '@material-ui/icons/Delete';
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -61,8 +63,8 @@ export default function DetailedExpansionPanel(props) {
           aria-controls="panel1c-content"
           id="panel1c-header"
         >
-          <div className={classes.column}>
-            <Typography className={classes.heading}>{props.task1}</Typography>
+          <div className={classes.column } >
+            <Typography class= "Title" className={classes.heading}>{props.task1}</Typography>
           </div>
           <div className={classes.column}>
             <Typography className={classes.secondaryHeading}>Deadline: {props.dueDate}</Typography>
@@ -82,9 +84,7 @@ export default function DetailedExpansionPanel(props) {
         </ExpansionPanelDetails>
         <Divider />
         <ExpansionPanelActions>
-          <Button size="small" color="primary" >
-            Update Your Task
-          </Button>
+          <Button><DeleteIcon style = {{color: "red"}} /></Button>
         </ExpansionPanelActions>
       </ExpansionPanel>
     </div>

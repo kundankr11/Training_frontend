@@ -24,7 +24,7 @@ class Forget extends Component {
 
     constructor() {
         super();
-         const urltoken = window.location.href.split('=')[1];
+        const urltoken = window.location.href.split('=')[1];
         console.log("My Location In react", urltoken);
         this.state = {
             email: "",

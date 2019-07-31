@@ -56,7 +56,7 @@ class statusupdate extends Component {
 		this.props.statusSearch(task);
 	}
 
-	handleClick(event) {
+	handleClick = event => {
 		const task = {
 			taskTitle: this.state.taskTitle,
 			taskDes: this.state.taskDes,
@@ -75,7 +75,7 @@ class statusupdate extends Component {
 		
 	}
 
-	handleClick1(event) {
+	handleClick1 = event => {
 		console.log("A row has been clicked", event);
 		this.setState(
 			{
@@ -95,11 +95,7 @@ class statusupdate extends Component {
 			}
 		);
 	}
-
-	handleClick2(event) {
-		console.log(event);
-	}
-
+	
 	handleNext = event => {
 		const pageData = {
 			curr_page: this.props.paginationPage,

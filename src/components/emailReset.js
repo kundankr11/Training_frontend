@@ -55,20 +55,20 @@ class emailReset extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        if (formValid(this.state)){
 
 
             const user ={
             email: this.state.email,
           }  
 
-        this.props.sendEmail(user, this.props.history);}
+        this.props.sendEmail(user, this.props.history);
       }
     render() {
         
      
         const {errors} = this.state;
         const { formErrors } = this.state;
+        this.props.resetErrors();
         return(
         <div className="container" style={{ marginTop: '100px', width: '840px'}}>
             <h1 style={{marginBottom: '40px'}}>PASSWORD RESET</h1>
@@ -92,7 +92,7 @@ class emailReset extends Component {
                     </button>
                 </div>
             </form>
-            <div><h6 style={{ color: 'red' }}>{this.props.errors}{console.log(this.props.errors)} {this.state.conf}</h6></div>
+            <div><h6 style={{ color: 'red' }}>{this.props.errors}{console.log(this.props.errors, "saf errorssss dsf")} {this.state.conf} sajfndskjfoksdogfids</h6></div>
         </div>
         )
     }

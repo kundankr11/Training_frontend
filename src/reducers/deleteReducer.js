@@ -7,7 +7,7 @@ export default function(state = initialState, action ) {
     console.log(action.payload); 
     switch(action.type) {
         case DELETE_USER:
-            return {...state, loader:true, deleteInfo:action.payload};
+            return action.payload;
         default: 
             return state;
     }

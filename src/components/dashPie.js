@@ -20,6 +20,7 @@ import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
+import Button1 from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 import { deepOrange, deepPurple, green } from "@material-ui/core/colors";
 import Chip from "@material-ui/core/Chip";
@@ -27,9 +28,11 @@ import FaceIcon from "@material-ui/icons/Face";
 import History from "@material-ui/icons/History";
 import DoneIcon from "@material-ui/icons/Done";
 import AssignmentIcon from "@material-ui/icons/Assignment";
+import DeleteIcon from "@material-ui/icons/Delete";
 import ExpansionPanel from "../components/expansion";
 import Container from "@material-ui/core/Container";
 import Carousel from "react-bootstrap/Carousel";
+import Menu from '../components/materialcomp/menu'
 import {
 	Bootstrap,
 	Form,
@@ -259,18 +262,7 @@ class dashPie extends Component {
 								>
 									<ListItem alignItems="flex-start">
 										<ListItemAvatar>
-											<Avatar
-												style={{
-													color: "#fff",
-													backgroundColor: green[500]
-												}}
-											>
-												<AssignmentIcon />
-												{console.log(
-													"pasiinf gthe props.....",
-													filter[0].taskTitle
-												)}
-											</Avatar>
+											<Menu />
 										</ListItemAvatar>
 										<ExpansionPanel
 											style={{ marginBottom: "10px" }}
@@ -285,14 +277,7 @@ class dashPie extends Component {
 									<Divider variant="inset" component="li" />
 									<ListItem alignItems="flex-start">
 										<ListItemAvatar>
-											<Avatar
-												style={{
-													color: "#fff",
-													backgroundColor: green[500]
-												}}
-											>
-												<AssignmentIcon />
-											</Avatar>
+											<Menu />
 										</ListItemAvatar>
 										<ExpansionPanel
 											task1={filter[1].taskTitle}
@@ -306,14 +291,7 @@ class dashPie extends Component {
 									<Divider variant="inset" component="li" />
 									<ListItem alignItems="flex-start">
 										<ListItemAvatar>
-											<Avatar
-												style={{
-													color: "#fff",
-													backgroundColor: green[500]
-												}}
-											>
-												<AssignmentIcon />
-											</Avatar>
+											<Menu />
 										</ListItemAvatar>
 										<ExpansionPanel
 											task1={filter[2].taskTitle}

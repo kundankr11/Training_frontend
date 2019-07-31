@@ -73,6 +73,7 @@ class search extends Component {
     this.props.Search(user);
   }
 
+
   handleNext = event => {
     const pageData = {
       curr_page: this.props.paginationPage,

@@ -193,7 +193,7 @@ class newtask extends Component {
 		return (
 			<div>
 				<Navbar1 />
-				<Taskbar cookies = {this.props.cookies}/>
+				<Taskbar cookies = {this.props.cookies} />
 				<div style={{ padding: "0px 250px 0px 450px" }}>
 					<div className="UserListing">
 						{isAdmin(localStorage.getItem("role")) ? (

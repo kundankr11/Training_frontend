@@ -14,11 +14,7 @@ export default function(state = initialState, action ) {
             return {...state, dataloading:true};
         }
         case GET_DATA_SUCCESS:{
-        	let newState = state
-        	newState.fetched_data=action.payload;
-        	newState.dataloading = false;
-        	// return newState
-            // return {...state, dataloading:false, fetched_data: action.payload};
+            return {...state, dataloading:false, fetched_data: action.payload};
         }
         case GET_DATA_FAILURE:{
         	return {...state, dataloading:false, errors: action.payload};
