@@ -115,7 +115,7 @@ class Navbar extends Component {
                 </Link>
                  <div>
                     <Badge
-                        badgeContent={10}
+                        badgeContent={this.props.count}
                         color="secondary"
                     >
                         <MailIcon />
@@ -139,7 +139,8 @@ class Navbar extends Component {
 }
 const mapStateToProps = (state, ownProps) => ({
     auth: state.auth,
-    cookies: ownProps.cookies
+    cookies: ownProps.cookies,
+    count: state.notification,
 });
 
 export const nav = connect(

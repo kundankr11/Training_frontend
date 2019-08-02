@@ -11,6 +11,7 @@ import "react-activity/dist/react-activity.css";
 import "../taskSearch.css";
 import Pusher from "pusher-js";
 import jwt_decode from "jwt-decode";
+import {setIcon} from "../actions/notification";
 import {
 	Bootstrap,
 	Form,
@@ -43,7 +44,6 @@ class tasklist extends Component {
 			dueDate: null,
 			beforedate: null,
 			page: 1,
-			not:0
 		};
 		const task = {
 			taskTitle: this.state.taskTitle,
@@ -57,7 +57,8 @@ class tasklist extends Component {
 		this.props.taskSearch(task);
 	}
 
-	componentDidMount() {
+	componentDidMount = () => {
+		
 		const Token = this.props.cookies.get("token");
 		const decoded = jwt_decode(Token);
 		const id = decoded.sub;
@@ -67,9 +68,15 @@ class tasklist extends Component {
 			cluster: "ap2"
 		});
 		var channel = pusher.subscribe(channelName);
-		channel.bind("Login", function(data) {
+		channel.bind("Login", data => {
 			alert("data.message");
+			console.log(this.props.notification, "notification");
+			this.setNotification();
 		});
+	}
+
+	setNotification = () => {
+		this.props.setIcon(this.props.notification);
 	}
 
 	handleClick = event => {
@@ -190,7 +197,7 @@ class tasklist extends Component {
 	render() {
 		const filter = this.props.result.fetched_data;
 		console.log("New Reducers", this.props.result);
-		return (
+				return (
 			<div id="tasklist">
 				<Navbar1 />
 				<Taskbar data={filter} cookies={this.props.cookies} not ={this.state.not} />
@@ -452,7 +459,8 @@ const mapStateToProps = (state, ownProps) => ({
 	auth: state.auth,
 	resultInfo: state.resultInfo,
 	paginationPage: state.paginationPage,
-	cookies: ownProps.cookies
+	cookies: ownProps.cookies,
+	notification: state.notification,
 });
 
 export default connect(
@@ -463,6 +471,7 @@ export default connect(
 		paginatePageNext,
 		paginatePagePrev,
 		resetErrors,
-		taskSearch
+		taskSearch,
+		setIcon,
 	}
 )(tasklist);

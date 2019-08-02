@@ -8,7 +8,8 @@ import deleteReducer from './deleteReducer';
 import pieDataReducer from './pieDataReducer';
 import loaderReducer from './loaderReducer';
 import newred from './new';
-import dataLoadingCompleteReducer from './dataLoadingCompleteReducer'
+import dataLoadingCompleteReducer from './dataLoadingCompleteReducer';
+import notificationReducer from './notification'
 
 export default combineReducers({
     errors: errorReducer,
@@ -21,4 +22,5 @@ export default combineReducers({
     result1: newred,
     dataLoading: dataLoadingCompleteReducer,
     loader: loaderReducer,
+    notification: notificationReducer,
 });
