@@ -106,6 +106,7 @@ class App extends React.Component {
 					color="primary"
 					style={{ padding: "5px" }}
 					onClick={this.handleClick}
+					style = {{backgroundColor:"#569626"}} 
 				>
 					<AssignmentIcon />
 				</Button>
@@ -121,12 +122,12 @@ class App extends React.Component {
 						</ListItemIcon>
 						<ListItemText primary="Update Task " />
 					</StyledMenuItem>
-					<StyledMenuItem >
+					<StyledMenuItem onClick={this.handleClickStatus} >
 						<ListItemIcon>
 							<LabelIcon />
 						</ListItemIcon>
 						<ListItemText primary="Update Task Status" />
-						<Button onClick={this.handleClickStatus}>Hi</Button>
+				
 						
 					</StyledMenuItem>
 				</StyledMenu>

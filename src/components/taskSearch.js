@@ -9,6 +9,8 @@ import classnames from "classnames";
 import { Dots } from "react-activity";
 import "react-activity/dist/react-activity.css";
 import "../taskSearch.css";
+import Pusher from "pusher-js";
+import jwt_decode from "jwt-decode";
 import {
 	Bootstrap,
 	Form,
@@ -40,7 +42,8 @@ class tasklist extends Component {
 			status: null,
 			dueDate: null,
 			beforedate: null,
-			page: 1
+			page: 1,
+			not:0
 		};
 		const task = {
 			taskTitle: this.state.taskTitle,
@@ -52,6 +55,21 @@ class tasklist extends Component {
 			beforedate: this.state.beforedate
 		};
 		this.props.taskSearch(task);
+	}
+
+	componentDidMount() {
+		const Token = this.props.cookies.get("token");
+		const decoded = jwt_decode(Token);
+		const id = decoded.sub;
+		const channelName = "login." + id;
+		console.log(channelName,"TOKENNNNNNNNNNN");
+		var pusher = new Pusher("fea611aa8ced2588b8e6", {
+			cluster: "ap2"
+		});
+		var channel = pusher.subscribe(channelName);
+		channel.bind("Login", function(data) {
+			alert("data.message");
+		});
 	}
 
 	handleClick = event => {
@@ -71,7 +89,7 @@ class tasklist extends Component {
 		};
 		this.props.paginatePageReset(pageData);
 		this.props.taskSearch(task);
-	}
+	};
 
 	handleClick1 = event => {
 		console.log("A row has been clicked", event);
@@ -87,7 +105,7 @@ class tasklist extends Component {
 			page: this.props.paginationPage
 		};
 		this.props.taskSearch(task);
-	}
+	};
 
 	handleClick2(event) {
 		console.log(event);
@@ -173,9 +191,9 @@ class tasklist extends Component {
 		const filter = this.props.result.fetched_data;
 		console.log("New Reducers", this.props.result);
 		return (
-			<div id = "tasklist">
+			<div id="tasklist">
 				<Navbar1 />
-				<Taskbar data={filter} cookies={this.props.cookies} />
+				<Taskbar data={filter} cookies={this.props.cookies} not ={this.state.not} />
 				{/*			<h1> Task Search</h1>*/}
 
 				<div className="UserListing">

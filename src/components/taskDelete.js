@@ -72,7 +72,7 @@ class creatorupdate extends Component {
 
 		this.props.updateSearch(task);
 		this.props.paginatePageReset(pageData);
-	}
+	};
 
 	handleClick1 = event => {
 		console.log("A row has been clicked", event);
@@ -90,8 +90,7 @@ class creatorupdate extends Component {
 				console.log("task Update", task);
 			}
 		);
-	}
-
+	};
 
 	handleNext = event => {
 		const pageData = {
@@ -119,7 +118,7 @@ class creatorupdate extends Component {
 		};
 		this.props.taskDelete(task, this.props.history);
 		console.log("task Update", task);
-	}
+	};
 
 	handlePrev = event => {
 		const pageData = {
@@ -185,7 +184,7 @@ class creatorupdate extends Component {
 		return (
 			<div>
 				<Navbar1 />
-				<Taskbar  cookies = {this.props.cookies}/>
+				<Taskbar cookies={this.props.cookies} />
 
 				{!this.state.showme ? (
 					<h3
@@ -193,13 +192,13 @@ class creatorupdate extends Component {
 							color: "#053787",
 							paddingLeft: "200px",
 							marginTop: "10px",
-							marginLeft:"460px"
+							marginLeft: "460px"
 						}}
 					>
 						{" "}
 						Select a Task to Delete
 					</h3>
-				) :null}
+				) : null}
 				{
 					<div className="UserListing">
 						<div
@@ -404,8 +403,18 @@ class creatorupdate extends Component {
 													}
 												>
 													<td>{detail.taskTitle}</td>
-													<td>{detail.assigned_by.name}</td>
-													<td>{detail.assigned_to.name}</td>
+													<td>
+														{
+															detail.assigned_by
+																.name
+														}
+													</td>
+													<td>
+														{
+															detail.assigned_to
+																.name
+														}
+													</td>
 													<td>{detail.taskStatus}</td>
 													<td>{detail.dueDate}</td>
 													<td>{detail.taskDes}</td>
@@ -448,7 +457,7 @@ const mapStateToProps = (state, ownProps) => ({
 	auth: state.auth,
 	resultInfo: state.resultInfo,
 	paginationPage: state.paginationPage,
-	cookies: ownProps.cookies,
+	cookies: ownProps.cookies
 });
 
 export default connect(

@@ -5,19 +5,34 @@ import { logoutUser } from "../actions/authentication";
 import { withRouter } from "react-router-dom";
 import isEmpty from "../validation/is-empty";
 import isAdmin from "../validation/isAdmin";
+import { makeStyles } from "@material-ui/core/styles";
+import Badge from "@material-ui/core/Badge";
+import MailIcon from "@material-ui/icons/Mail";
 import "../components/Navbar.css";
 
 class Navbar extends Component {
     onLogout(e) {
         e.preventDefault();
-            this.props.cookies.remove('token');
+        this.props.cookies.remove("token");
         this.props.logoutUser(this.props.history);
     }
     render() {
         const { isAuthenticated, user } = this.props.auth;
         const role = localStorage.getItem("role");
+        const useStyles = makeStyles(theme => ({
+            margin: {
+                margin: theme.spacing(2)
+            },
+            padding: {
+                padding: theme.spacing(0, 2)
+            }
+        }));
+        
         const authLinks = (
             <ul className="navbar-nav ml-auto">
+                <li>
+                    
+                </li>
                 <li className="nav-item">
                     <Link className="nav-link" to="/search">
                         Search User
@@ -75,7 +90,7 @@ class Navbar extends Component {
                         Search User
                     </Link>
                 </li>
-                
+
                 <li className="nav-item">
                     <Link className="nav-link" to="/dash">
                         Task Management
@@ -98,23 +113,33 @@ class Navbar extends Component {
                 <Link className="navbar-brand" to="/">
                     USER AND TASK MANAGEMENT MODULE
                 </Link>
+                 <div>
+                    <Badge
+                        badgeContent={10}
+                        color="secondary"
+                    >
+                        <MailIcon />
+                    </Badge>
+                </div>
                 <div
                     className="collapse navbar-collapse"
                     id="navbarSupportedContent"
                 >
+
                     {isAdmin(localStorage.getItem("role"))
                         ? authLinks
                         : !isEmpty(localStorage.getItem("role"))
                         ? guestLinks
                         : loginLinks}
                 </div>
+               
             </nav>
         );
     }
 }
 const mapStateToProps = (state, ownProps) => ({
     auth: state.auth,
-    cookies: ownProps.cookies,
+    cookies: ownProps.cookies
 });
 
 export const nav = connect(

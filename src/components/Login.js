@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { loginUser, resetErrors } from "../actions/authentication";
 import { NavLink } from "react-router-dom";
+import ScriptTag from 'react-script-tag';
 import "../login.css";
 
 const emailRegex = RegExp(
@@ -95,6 +96,7 @@ class Login extends Component {
         const { formErrors } = this.state;
         this.props.resetErrors();
         return (
+
             <body className="Body">
                 <div className="container">
                     <h1 style={{ marginBottom: "40px" }}>LOGIN</h1>

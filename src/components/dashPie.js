@@ -20,7 +20,7 @@ import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import Button1 from '@material-ui/core/Button';
+import Button1 from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { deepOrange, deepPurple, green } from "@material-ui/core/colors";
 import Chip from "@material-ui/core/Chip";
@@ -32,7 +32,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ExpansionPanel from "../components/expansion";
 import Container from "@material-ui/core/Container";
 import Carousel from "react-bootstrap/Carousel";
-import Menu from '../components/materialcomp/menuRev'
+import Menu from "../components/materialcomp/menuRev";
+import Pusher from "pusher-js";
+import jwt_decode from "jwt-decode";
 import {
 	Bootstrap,
 	Form,
@@ -159,6 +161,9 @@ class dashPie extends Component {
 		};
 		this.props.pieData();
 		this.props.statusSearch(task);
+		var pusher = new Pusher("fea611aa8ced2588b8e6", {
+			cluster: "ap2"
+		});
 	}
 	componentDidUpdate() {
 		if (!this.props.result.dataloading) {
@@ -212,7 +217,7 @@ class dashPie extends Component {
 									width: "300px",
 									height: "48px",
 									marginTop: "25px",
-							
+
 									flexWrap: "wrap",
 									paddingLeft: "0",
 									paddingRight: "0"
@@ -328,14 +333,15 @@ class dashPie extends Component {
 	}
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
 	data: state.pieData,
 	errors: state.errors,
 	result: state.result1,
 	auth: state.auth,
 	resultInfo: state.resultInfo,
 	paginationPage: state.paginationPage,
-	dataLoading: state.dataLoading
+	dataLoading: state.dataLoading,
+	cookies: ownProps.cookies
 });
 
 export default connect(

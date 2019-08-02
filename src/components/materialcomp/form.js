@@ -1,53 +1,53 @@
-import React from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
+import React from "react";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles(theme => ({
   container: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    display: "flex",
+    flexWrap: "wrap"
   },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200,
+    width: 200
   },
   dense: {
-    marginTop: 19,
+    marginTop: 19
   },
   menu: {
-    width: 200,
-  },
+    width: 200
+  }
 }));
 
 const currencies = [
   {
-    value: 'USD',
-    label: '$',
+    value: "USD",
+    label: "$"
   },
   {
-    value: 'EUR',
-    label: '€',
+    value: "EUR",
+    label: "€"
   },
   {
-    value: 'BTC',
-    label: '฿',
+    value: "BTC",
+    label: "฿"
   },
   {
-    value: 'JPY',
-    label: '¥',
-  },
+    value: "JPY",
+    label: "¥"
+  }
 ];
 
 export default function TextFields() {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    name: 'Cat in the Hat',
-    age: '',
-    multiline: 'Controlled',
-    currency: 'EUR',
+    name: "Cat in the Hat",
+    age: "",
+    multiline: "Controlled",
+    currency: "EUR"
   });
 
   const handleChange = name => event => {
@@ -56,18 +56,17 @@ export default function TextFields() {
 
   return (
     <form className={classes.container} noValidate autoComplete="off">
-     
       <TextField
         id="standard-select-currency"
         select
         label="Select"
         className={classes.textField}
         value={values.currency}
-        onChange={handleChange('currency')}
+        onChange={handleChange("currency")}
         SelectProps={{
           MenuProps: {
-            className: classes.menu,
-          },
+            className: classes.menu
+          }
         }}
         helperText="Please select your currency"
         margin="normal"
@@ -84,12 +83,12 @@ export default function TextFields() {
         label="Native select"
         className={classes.textField}
         value={values.currency}
-        onChange={handleChange('currency')}
+        onChange={handleChange("currency")}
         SelectProps={{
           native: true,
           MenuProps: {
-            className: classes.menu,
-          },
+            className: classes.menu
+          }
         }}
         helperText="Please select your currency"
         margin="normal"
@@ -109,7 +108,7 @@ export default function TextFields() {
         fullWidth
         margin="normal"
         InputLabelProps={{
-          shrink: true,
+          shrink: true
         }}
       />
       <TextField
@@ -117,7 +116,7 @@ export default function TextFields() {
         className={classes.textField}
         defaultValue="Bare"
         margin="normal"
-        inputProps={{ 'aria-label': 'bare' }}
+        inputProps={{ "aria-label": "bare" }}
       />
     </form>
   );

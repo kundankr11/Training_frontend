@@ -21,7 +21,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import NewTaskbar from '../components/newtaskbar'
+import NewTaskbar from '../components/newtaskbar';
+import Badge from "@material-ui/core/Badge";
 
 import {
   Bootstrap,
@@ -41,7 +42,8 @@ class taskBar extends Component {
 
   
   render() {
-    console.log("AuthUSer", this.props.auth);
+    console.log("AuthUSer", this.props.not);
+
     return (
       <div class="sidebar">
         <div>
@@ -56,8 +58,17 @@ class taskBar extends Component {
             </Row>
           </Container>
         </div>
+         <div>
+                    <Badge
+                        badgeContent={this.props.not}
+                        color="secondary"
+                    >
+                        <MailIcon />
+                    </Badge>
+                </div>
         <a >
         <div className = "dash">
+        
           <Link className="nav-link" to="/dash" >
             Dashboard
           </Link>

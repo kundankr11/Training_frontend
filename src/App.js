@@ -55,7 +55,7 @@ class App extends Component {
                 <Route exact path="/taskdelete" component={withCookies(requireAuth(taskDelete))} />  
                 <Route exact path="/dash" component={withCookies(requireAuth(dashPie))} />
                 <Route exact path="/emailreset" render={() => (<EmailReset cookies={this.props.cookies}/>)} /> 
-            </div>
+            </div>    
           </BrowserRouter>
         </Provider>
         </CookiesProvider>
