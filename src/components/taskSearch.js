@@ -57,27 +57,7 @@ class tasklist extends Component {
 		this.props.taskSearch(task);
 	}
 
-	componentDidMount = () => {
-		
-		const Token = this.props.cookies.get("token");
-		const decoded = jwt_decode(Token);
-		const id = decoded.sub;
-		const channelName = "login." + id;
-		console.log(channelName,"TOKENNNNNNNNNNN");
-		var pusher = new Pusher("fea611aa8ced2588b8e6", {
-			cluster: "ap2"
-		});
-		var channel = pusher.subscribe(channelName);
-		channel.bind("Login", data => {
-			alert("data.message");
-			console.log(this.props.notification, "notification");
-			this.setNotification();
-		});
-	}
-
-	setNotification = () => {
-		this.props.setIcon(this.props.notification);
-	}
+	
 
 	handleClick = event => {
 		const task = {
@@ -460,7 +440,6 @@ const mapStateToProps = (state, ownProps) => ({
 	resultInfo: state.resultInfo,
 	paginationPage: state.paginationPage,
 	cookies: ownProps.cookies,
-	notification: state.notification,
 });
 
 export default connect(
@@ -472,6 +451,6 @@ export default connect(
 		paginatePagePrev,
 		resetErrors,
 		taskSearch,
-		setIcon,
+
 	}
 )(tasklist);

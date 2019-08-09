@@ -7,8 +7,7 @@ const initialState = {
 	errors:[],
 };
 
-export default function(state = initialState, action ) {
-    console.log(action.payload); 
+export default function(state = initialState, action ) { 
     switch(action.type) {
         case GET_DATA_REQUEST:{
             return {...state, dataloading:true};
@@ -17,7 +16,7 @@ export default function(state = initialState, action ) {
             return {...state, dataloading:false, fetched_data: action.payload};
         }
         case GET_DATA_FAILURE:{
-        	return {...state, dataloading:false, errors: action.payload};
+        	return {...state, dataloading:false,  errors: action.payload};
         }
         default:{
         	return state;

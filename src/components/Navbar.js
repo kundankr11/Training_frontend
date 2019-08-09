@@ -9,8 +9,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Badge from "@material-ui/core/Badge";
 import MailIcon from "@material-ui/icons/Mail";
 import "../components/Navbar.css";
+import Menu from "../components/materialcomp/notification";
+
+
 
 class Navbar extends Component {
+ 
     onLogout(e) {
         e.preventDefault();
         this.props.cookies.remove("token");
@@ -31,7 +35,7 @@ class Navbar extends Component {
         const authLinks = (
             <ul className="navbar-nav ml-auto">
                 <li>
-                    
+                <Menu cookies = {this.props.cookies} />
                 </li>
                 <li className="nav-item">
                     <Link className="nav-link" to="/search">
@@ -85,6 +89,17 @@ class Navbar extends Component {
 
         const guestLinks = (
             <ul className="navbar-nav ml-auto">
+            <li>
+                <div>
+                    <Badge
+                        badgeContent={this.props.count}
+                        color="secondary"
+                         style={{marginRight:"10px", marginTop:"8px"}}
+                    >
+                        <MailIcon />
+                    </Badge>
+                </div>
+            </li>
                 <li className="nav-item">
                     <Link className="nav-link" to="/search">
                         Search User
@@ -113,14 +128,7 @@ class Navbar extends Component {
                 <Link className="navbar-brand" to="/">
                     USER AND TASK MANAGEMENT MODULE
                 </Link>
-                 <div>
-                    <Badge
-                        badgeContent={this.props.count}
-                        color="secondary"
-                    >
-                        <MailIcon />
-                    </Badge>
-                </div>
+                 
                 <div
                     className="collapse navbar-collapse"
                     id="navbarSupportedContent"
@@ -140,12 +148,11 @@ class Navbar extends Component {
 const mapStateToProps = (state, ownProps) => ({
     auth: state.auth,
     cookies: ownProps.cookies,
-    count: state.notification,
 });
 
 export const nav = connect(
     mapStateToProps,
-    { logoutUser }
+    { logoutUser,}
 )(withRouter(Navbar));
 
 export default nav;

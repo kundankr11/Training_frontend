@@ -10,6 +10,7 @@ import statusupdate from './components/statusUpdate';
 import newtask from './components/newtask';
 import Register from './components/Register';
 import Login from './components/Login';
+import ReduxFormLogin from './components/LoginReduxForm';
 import Home from './components/Home';
 import search from './components/search';
 import deleteuser from './components/delete';
@@ -41,6 +42,7 @@ class App extends Component {
                 <Route exact path="/" component={ Home } />
                 <Route exact path="/register" component={ withCookies(loginProtect(Register)) } />
                 <Route exact path="/login" component={ withCookies(loginProtect(Login) )} />
+                <Route exact path="/reduxformlogin" component={ withCookies((ReduxFormLogin) )} />
                 <Route exact path="/forget" component={ withCookies(loginProtect(forget)) } />
                 <Route exact path="/create" component={withCookies(requireAuth(createUser))} />
                 <Route exact path="/search" component={withCookies(requireAuth(search))} /> 
@@ -55,7 +57,7 @@ class App extends Component {
                 <Route exact path="/taskdelete" component={withCookies(requireAuth(taskDelete))} />  
                 <Route exact path="/dash" component={withCookies(requireAuth(dashPie))} />
                 <Route exact path="/emailreset" render={() => (<EmailReset cookies={this.props.cookies}/>)} /> 
-            </div>    
+            </div>
           </BrowserRouter>
         </Provider>
         </CookiesProvider>

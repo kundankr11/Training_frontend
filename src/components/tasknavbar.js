@@ -42,7 +42,6 @@ class taskBar extends Component {
 
   
   render() {
-    console.log("AuthUSer", this.props.not);
 
     return (
       <div class="sidebar">
@@ -58,14 +57,6 @@ class taskBar extends Component {
             </Row>
           </Container>
         </div>
-         <div>
-                    <Badge
-                        badgeContent={this.props.not}
-                        color="secondary"
-                    >
-                        <MailIcon />
-                    </Badge>
-                </div>
         <a >
         <div className = "dash">
         

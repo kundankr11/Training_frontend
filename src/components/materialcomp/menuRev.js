@@ -106,7 +106,6 @@ class App extends React.Component {
 					color="primary"
 					style={{ padding: "5px" }}
 					onClick={this.handleClick}
-					style = {{backgroundColor:"#569626"}} 
 				>
 					<AssignmentIcon />
 				</Button>

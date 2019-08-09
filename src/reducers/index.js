@@ -9,7 +9,8 @@ import pieDataReducer from './pieDataReducer';
 import loaderReducer from './loaderReducer';
 import newred from './new';
 import dataLoadingCompleteReducer from './dataLoadingCompleteReducer';
-import notificationReducer from './notification'
+import notificationReducer from './notification';
+import { reducer as formReducer } from 'redux-form';
 
 export default combineReducers({
     errors: errorReducer,
@@ -22,5 +23,7 @@ export default combineReducers({
     result1: newred,
     dataLoading: dataLoadingCompleteReducer,
     loader: loaderReducer,
-    notification: notificationReducer,
+    count: notificationReducer,
+    form: formReducer,
+
 });

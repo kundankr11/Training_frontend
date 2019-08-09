@@ -32,6 +32,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ExpansionPanel from "../components/expansion";
 import Container from "@material-ui/core/Container";
 import Carousel from "react-bootstrap/Carousel";
+import {setIcon} from "../actions/notification";
 import Menu from "../components/materialcomp/menuRev";
 import Pusher from "pusher-js";
 import jwt_decode from "jwt-decode";
@@ -96,13 +97,16 @@ class dashPie extends Component {
 		};
 	}
 
+
+
 	high() {
 		let itemList = this.state.series[0].data;
-		itemList[0].y = this.props.data.completed_on_time;
-		itemList[1].y = this.props.data.completed_after_deadline;
-		itemList[2].y = this.props.data.overdues;
-		itemList[3].y = this.props.data.progress;
-		itemList[4].y = this.props.data.noActivities;
+		console.log(this.state.series[0].data, "Series data Before update");
+		itemList[0].y = this.props.data.pie_fetched_data.completed_on_time;
+		itemList[1].y = this.props.data.pie_fetched_data.completed_after_deadline;
+		itemList[2].y = this.props.data.pie_fetched_data.overdues;
+		itemList[3].y = this.props.data.pie_fetched_data.progress;
+		itemList[4].y = this.props.data.pie_fetched_data.noActivities;
 		if (
 			itemList[0].y !== 0 ||
 			itemList[1].y !== 0 ||
@@ -114,6 +118,8 @@ class dashPie extends Component {
 				showme: true
 			});
 		}
+
+		console.log(itemList, "Series data");
 	}
 	useStyles = makeStyles(theme => ({
 		root: {
@@ -155,30 +161,33 @@ class dashPie extends Component {
 			series: this.state.series
 		});
 	}
-	componentDidMount() {
+	componentDidMount = () => {
 		const task = {
 			pie: 1
 		};
+		this.props.statusSearch(task);     
 		this.props.pieData();
-		this.props.statusSearch(task);
-		var pusher = new Pusher("fea611aa8ced2588b8e6", {
-			cluster: "ap2"
-		});
-	}
+    }
+
+
+	
 	componentDidUpdate() {
-		if (!this.props.result.dataloading) {
+		if (!this.props.data.pie_dataloading) {
+			console.log(this.state.showme,"Setting Pie data", this.props.data.pie_dataloading);
 			if (!this.state.showme) {
+
 				this.high();
 			}
 
 			if (this.state.showme) {
 				this.highChartsRender();
-				this.props.dataLoadingReset();
+				console.log(this.props.data, "Showmeeeee");
 			}
 		}
 	}
 
 	render() {
+		console.log(window.state, "WINDOW STATE");
 		const filter = this.props.result.fetched_data;
 		console.log("New UI is here", filter);
 		console.log("PieDATa", this.props.loader);
@@ -317,7 +326,7 @@ class dashPie extends Component {
 						<div></div>
 					</div>
 				) : null}
-				{!this.props.result.dataloading && !this.state.showme ? (
+				{!this.props.result.dataloading && !this.state.showme && !this.props.data.pie_dataloading ? (
 					<h2
 						style={{
 							color: "#111",
@@ -341,7 +350,7 @@ const mapStateToProps = (state, ownProps) => ({
 	resultInfo: state.resultInfo,
 	paginationPage: state.paginationPage,
 	dataLoading: state.dataLoading,
-	cookies: ownProps.cookies
+	cookies: ownProps.cookies,
 });
 
 export default connect(
@@ -355,6 +364,6 @@ export default connect(
 		statusSearch,
 		statusUpdate,
 		pieData,
-		dataLoadingReset
+		dataLoadingReset,
 	}
 )(dashPie);

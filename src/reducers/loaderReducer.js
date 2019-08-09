@@ -8,11 +8,9 @@ export default function(state = initialState, action ) {
     switch(action.type) {
 
         case RESET_LOADER:{
- console.log("Reset Loader", action.payload);
-
-            return action.payload;
+            return {...state, loader: action.payload};
         }
         default: 
-            return false;
+            return state;
     }
 }

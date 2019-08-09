@@ -1,8 +1,27 @@
-import { SET_ICON } from "./types";
+import { SET_ICON, ADD_NOTIFICATION, NOTIFICATION_ADDED, CLEAR_NOTIFICATION } from "./types";
 
-export const setIcon = value => {
+export const setIcon1 = () => {
     return {
         type: SET_ICON,
-        payload: value
+    };
+};
+
+
+export const addNotification = (data) => {
+    return {
+        type: ADD_NOTIFICATION,
+        payload: data
+    };
+};
+
+export const notificationAdded = () => {
+    return {
+        type: NOTIFICATION_ADDED,
+    };
+};
+
+export const clearNotification = () => {
+    return {
+        type: CLEAR_NOTIFICATION,
     };
 };
